@@ -25,7 +25,7 @@ class GUI:
 		self.window.title("Text Expander")
 		self.window.geometry("350x600")
 		self.window.resizable(0, 0)
-		self.window.iconbitmap(r'C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\icon.ico')
+		self.window.iconbitmap(r'\Text Exp\icon.ico')
 
 		submit_button = Button(self.window, text="submit", height = 1, width = 9, command = self.submit)
 		submit_button.place(x = 150, y = 540)
@@ -45,8 +45,8 @@ class GUI:
 			self.functions.append(None)
 
 		# if there are saved slots then open them	
-		if (os.path.exists(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl") and
-			os.stat(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl").st_size != 0):
+		if (os.path.exists(r"\Text Exp\slots.pkl") and
+			os.stat(r"\Text Exp\slots.pkl").st_size != 0):
 			self.load()
 			self.submit()
 
@@ -76,14 +76,14 @@ class GUI:
 
 			self.functions.append(func)
 
-		file = open(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl", "wb");
+		file = open(r"\Text Exp\slots.pkl", "wb");
 		pickle.dump(self.pairs, file)
 
 
 	# load slots of previous session
 	def load(self):
 
-		file = open(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl", "rb");
+		file = open(r"C\Text Exp\slots.pkl", "rb");
 		self.pairs = pickle.load(file)
 
 		for i in range(len(self.slots)):
