@@ -16,4 +16,4 @@ You can download TextExp.exe and install it as common application. After install
 and there is no any virus.
 
 
-Please feel free to contact me if have problems or questions.
+Please feel free to contact me if you have problems or questions.
