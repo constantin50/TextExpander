@@ -1,9 +1,10 @@
-# program replace defined sequence of symbols with another one
+# program func defined sequence of symbols with another one
 # example: '\delta' -> 'δ' 
 #
 # above: 
-# preimage - sequence of symbols that is replaced
-# image - sequence of symbols that preimage is replaced with
+# preimage - sequence of symbols that is funcd
+# image - sequence of symbols that preimage is funcd with
+#
 
 import tkinter
 from tkinter import *
@@ -14,9 +15,9 @@ import os
 class GUI:
 
 	window = None
-	slots = list() # list of pairs of entries  
-	pairs = list() # list of pairs where each pais is [preimage, image]
-	functions = list() # list of functions that implement replacement preimage with image
+	slots = list() # list of pairs of GUI-entries  
+	pairs = list() # list of pairs where each pair is list [preimage, image]
+	functions = list() # functions that implement replacement the preimage with the image
 
 	def __init__(self):
 
@@ -43,6 +44,7 @@ class GUI:
 			self.pairs.append(["",""])
 			self.functions.append(None)
 
+		# if there are saved slots then open them	
 		if (os.path.exists(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl") and
 			os.stat(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl").st_size != 0):
 			self.load()
@@ -58,10 +60,10 @@ class GUI:
 			for i in range(len(preimage)+1):
 				keyboard.press_and_release("backspace")
 			keyboard.write(image)
-		print("function with ", preimage, " and ", image)
 		return func
 
-	# save current slots 
+
+	# save slots of current session 
 	def save(self):
 
 		for slot in self.slots:
@@ -70,12 +72,13 @@ class GUI:
 			image = slot[1].get()
 
 			self.pairs.append([preimage, image])
-			replace = self.make_func(preimage,image)
+			func = self.make_func(preimage,image)
 
-			self.functions.append(replace)
+			self.functions.append(func)
 
 		file = open(r"C:\Users\kkons\OneDrive\Документы\Код\Current Projects\Text Exp\slots.pkl", "wb");
 		pickle.dump(self.pairs, file)
+
 
 	# load slots of previous session
 	def load(self):
@@ -90,13 +93,11 @@ class GUI:
 
 			self.slots[i][0].insert(0,preimage)
 			self.slots[i][1].insert(0,image)
-
-			replace = self.make_func(preimage,image)
-
-			self.functions[i] = replace
+			func = self.make_func(preimage,image)
+			self.functions[i] = func
 
 
-
+	# get info form entries, make functions, save changes
 	def submit(self):
 		
 		for i in range(len(self.slots)):
@@ -104,30 +105,22 @@ class GUI:
 			preimage  = self.slots[i][0].get() # entry 1
 			image = self.slots[i][1].get() # entry 2
 
-			temp = image
-
-			# check: whether some phrase was removed
+			# check: whether some phrases were removed
 
 			if (preimage != self.pairs[i][0] and self.pairs[i][0] != "" ):
 				keyboard.remove_word_listener(self.pairs[i][0])
 				self.pairs[i][0] = preimage
 				self.pairs[i][1] = image
-				self.functions[i] = self.make_func(preimage, image)
-				print(self.pairs[i][0], " was removed")
 
 
 			if (preimage != "" and image != ""):
 
-				replace = self.make_func(preimage,image)
-				self.functions.append(replace)
-
-			self.pairs[i][0] = preimage
-			self.pairs[i][1] = image
-			print(preimage, "->", image)
-			keyboard.add_word_listener(preimage, self.functions[i])
+				self.functions[i] = self.make_func(preimage, image)
+				self.pairs[i][0] = preimage
+				self.pairs[i][1] = image
+				keyboard.add_word_listener(preimage, self.functions[i])
 
 		self.save()
-
-		print("slots have been saved")
+		self.window.iconify()
 
 t = GUI()
