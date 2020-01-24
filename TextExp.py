@@ -18,16 +18,19 @@ class GUI:
 	slots = list() # list of pairs of GUI-entries  
 	pairs = list() # list of pairs where each pair is list [preimage, image]
 	functions = list() # functions that implement replacement the preimage with the image
+	path = None
 
 	def __init__(self):
+
+		self.path = os.path.dirname(os.path.abspath(__file__))
 
 		self.window = Tk();
 		self.window.title("Text Expander")
 		self.window.geometry("350x600")
 		self.window.resizable(0, 0)
-		self.window.iconbitmap(r'\Text Exp\icon.ico')
+		self.window.iconbitmap(str(self.path) + '\\icon.ico')
 
-		submit_button = Button(self.window, text="submit", height = 1, width = 9, command = self.submit)
+		submit_button = Button(self.window, text="submit", height = 1, width = 19, command = self.submit)
 		submit_button.place(x = 150, y = 540)
 
 		k = 0;
@@ -45,8 +48,8 @@ class GUI:
 			self.functions.append(None)
 
 		# if there are saved slots then open them	
-		if (os.path.exists(r"\Text Exp\slots.pkl") and
-			os.stat(r"\Text Exp\slots.pkl").st_size != 0):
+		if (os.path.exists(str(self.path) + '\\slots.pkl') and
+			os.stat(str(self.path) + '\\slots.pkl').st_size != 0):
 			self.load()
 			self.submit()
 
@@ -76,14 +79,14 @@ class GUI:
 
 			self.functions.append(func)
 
-		file = open(r"\Text Exp\slots.pkl", "wb");
+		file = open(str(self.path) + '\\slots.pkl', "wb");
 		pickle.dump(self.pairs, file)
 
 
 	# load slots of previous session
 	def load(self):
 
-		file = open(r"C\Text Exp\slots.pkl", "rb");
+		file = open(str(self.path) + '\\slots.pkl', "rb");
 		self.pairs = pickle.load(file)
 
 		for i in range(len(self.slots)):
@@ -118,9 +121,9 @@ class GUI:
 				self.functions[i] = self.make_func(preimage, image)
 				self.pairs[i][0] = preimage
 				self.pairs[i][1] = image
-				keyboard.add_word_listener(preimage, self.functions[i])
+				keyboard.add_word_listener(preimage, self.functions[i], match_suffix=True)
 
 		self.save()
-		self.window.iconify()
 
 t = GUI()
+
