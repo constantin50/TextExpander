@@ -2,7 +2,7 @@
 Program for creating custom keyboard shortcuts to expand and replace text
 
 For example, it can be used for writing math with TeX commands
-![Alt Text](https://vk.com/doc446080314_534705398?hash=67ac9c6e663b4032fc&dl=3e923632a40334b41a&wnd=1&module=profile&mp4=1)
+![Alt Text](https://gfycat.com/accomplishedcloudyharpyeagle)
 
 by default slots are with tex-command are installed
 
