@@ -6,7 +6,7 @@ For example, it can be used for writing math with TeX commands
 
 by default slots are with tex-command are installed
 
-![Alt Text](https://sun9-10.userapi.com/c857036/v857036693/621b2/lhZyR6p2EaY.jpg)
+![](https://sun9-10.userapi.com/c857036/v857036693/621b2/lhZyR6p2EaY.jpg=500x250)
 
 
 * Windows Installer
