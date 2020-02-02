@@ -2,11 +2,11 @@
 Program for creating custom keyboard shortcuts to expand and replace text
 
 For example, it can be used for writing math with TeX commands
-![Alt Text](https://thumbs.gfycat.com/AccomplishedCloudyHarpyeagle-mobile.gif)
+![Alt Text](https://media.giphy.com/media/fvIBJuXxQSkwV9DYUj/giphy.gif)
 
 by default slots are with tex-command are installed
 
-![Alt Text](https://sun9-20.userapi.com/c855528/v855528084/1d80f3/eLqhPjIzoAQ.jpg)
+![Alt Text](https://sun9-10.userapi.com/c857036/v857036693/621b2/lhZyR6p2EaY.jpg = 500x250 )
 
 
 * Windows Installer
